@@ -1,4 +1,6 @@
 package com.gameshop;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Clase que gestiona el inventario de juegos en un almacén.
@@ -7,6 +9,7 @@ package com.gameshop;
  * @version 1.0
  */
 public class GestorInventario {
+    public static final Logger logger = Logger.getLogger(GestorInventario.class.getName());
     /**
      * Constante que define el stock mínimo permitido antes de generar una alerta.
      */
@@ -23,7 +26,7 @@ public class GestorInventario {
 
         totalJuegos = getJuegos(nombre, cantidad, totalJuegos);
 
-        System.out.println("Total de juegos en el almacén: " + totalJuegos);
+        logger.log(Level.INFO, "Total de juegos en el almacén: {0}", totalJuegos);
     }
 
     /**
@@ -37,10 +40,10 @@ public class GestorInventario {
     private static int getJuegos(String[] nombre, int[] cantidad, int totalJuegos) {
         for (int i = 0; i < nombre.length; i++) {
 
-            System.out.println("Revisando stock de: " + nombre[i]);
+            logger.log(Level.INFO, "Revisando stock de: {0}", nombre[i]);
 
             if (cantidad[i] <= STOCK_MINIMO) {
-                System.out.println("¡ALERTA! Pedir más copias de " + nombre[i]);
+                logger.log(Level.WARNING, "¡ALERTA! Pedir más copias de {0}", nombre[i]);
             }
 
             totalJuegos = totalJuegos + cantidad[i];

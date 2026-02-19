@@ -2,7 +2,7 @@ package com.gameshop;
 
 public class ProcesadorVentas {
 
-    public static final double descuento = 0.15;
+    public static final double Descuento = 0.15;
     public static final double IVA = 1.21;
     // VULNERABILIDAD SONARLINT: Contraseña en texto plano
     private String dbClave = "admin_super_secreto_123";
@@ -30,7 +30,7 @@ public class ProcesadorVentas {
 
     private static double Descuento(double precio) {
         double d;
-        d = precio * descuento;
+        d = precio * Descuento;
         return d;
     }
 }

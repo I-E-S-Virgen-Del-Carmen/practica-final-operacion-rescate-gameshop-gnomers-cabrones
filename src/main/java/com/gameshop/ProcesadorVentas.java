@@ -19,12 +19,12 @@ public class ProcesadorVentas {
         double precioFinal = precio - d;
 
         // CODE SMELL: Magic Number (1.21 representa el 21% de IVA)
-        precioFinal = CalculoIVA(precioFinal);
+        precioFinal = CalculoIva(precioFinal);
 
         return precioFinal;
     }
 
-    private static double CalculoIVA(double precioFinal) {
+    private static double CalculoIva(double precioFinal) {
         return precioFinal * IVA;
     }
 

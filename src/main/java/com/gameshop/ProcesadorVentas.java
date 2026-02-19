@@ -1,24 +1,23 @@
 package com.gameshop;
 
 public class ProcesadorVentas {
-
+    private static final double PORCENTAJE_DESCUENTO_VIP = 0.15;
+    private static final double FACTOR_IVA = 1.21;
     // VULNERABILIDAD SONARLINT: Contraseña en texto plano
     private String dbClave = "admin_super_secreto_123";
 
-    public double c(double p, boolean v) {
-        double d = 0;
+    public double c(double precioBase, boolean esVIP) {
 
-        if (v) {
-            // CODE SMELL: Magic Number (0.15 representa el 15% de descuento)
-            d = p * 0.15;
+        // 1️⃣ Aplicar descuento si es VIP
+        double precioConDescuento = precioBase;
+        if (esVIP) {
+            double montoDescuento = precioBase * PORCENTAJE_DESCUENTO_VIP;
+            precioConDescuento = precioBase - montoDescuento; // 🐛 BUG FIX: Restar, no sumar
         }
 
-        // BUG LÓGICO: Al VIP se le está SUMANDO el descuento al precio original, encareciendo el juego.
-        double pf = p + d;
+        // 2️⃣ Aplicar IVA al precio ya descontado
+        double precioFinal = precioConDescuento * FACTOR_IVA;
 
-        // CODE SMELL: Magic Number (1.21 representa el 21% de IVA)
-        pf = pf * 1.21;
-
-        return pf;
+        return precioFinal;
     }
 }
